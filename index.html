@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="shortcut icon" href="favicon.ico" />
 <title>Vital Partners Leading Dating and Introduction Agency in Sydney &amp; Canberra</title>
+<link rel="stylesheet" href="css/all.min.css">
 <link href="css/default.css" rel="stylesheet" type="text/css" media="all">
 <link href="css/stylesheet.css" rel="stylesheet" type="text/css" media="all">
 <!--<link href="css/small-resolution.css" rel="stylesheet" type="text/css" media="all">
@@ -123,69 +124,73 @@
 				
 				<ul>
 					<li class="fileds">
-						<div class="name_fileds" >
-							<label>First Name</label>
-							<input name="firstname" id="firstname" type="text" /> 
-							<span class="text-danger" id="f_name"></span>
+						<div class="name_fileds" style="margin-bottom: 50;">
+							<label>First Name<span class="required">*</span></label>
+							<input name="firstname" id="firstname" autocomplete="off" type="text" onblur="FirstNameCheck();" /> 
+							<span class="text-danger" id="f_name" ></span>
 						</div>
+						
 						<div class="name_fileds">
-							<label>Last Name</label>
-							<input name="lastname" id="lastname" type="text" /> 
+							<label>Last Name<span class="required">*</span></label>
+							<input name="lastname" id="lastname" autocomplete="off" type="text" onblur="LastNameCheck();"/> 
 							<span class="text-danger" id="l_name"></span>
 						</div>
 					</li>
+					
 					<li class="fileds">
 						<div class="phone_fileds">
-							<label>Phone No</label>
-							<input name="phone" id="phone" type="text"  /> 
+							<label>Phone No<span class="required">*</span></label>
+							<input name="phone" id="phone" autocomplete="off" type="text" onblur="PhoneCheck();" onkeypress='return restrictAlphabets(event)' /> 
 							<span class="text-danger" id="mobile"></span>
 						</div>
 						<div class="phone_fileds">
 							<label>Office No</label>
-							<input name="office" id="office" type="text" /> 
+							<input name="office" id="office" autocomplete="off"  type="text" onblur="OfficeCheck();"/> 
 							<span class="text-danger" id="office_no"></span>
 						</div>
 					</li>					
 					<li class="fileds">
 						<div class="email_fileds">
-							<label>Email</label>
-							<input name="email" id="email" type="text" /> 
+							<label>Email<span class="required">*</span></label>
+							<input name="email" id="email" autocomplete="off" type="text" onblur="EmailCheck();"/> 
 							<span id="emailids" class="text-danger"> </span>
 						</div>
 						<div class="pass_fileds">
-							<label>Password</label>
-							<input name="password" id="pass" type="password" /> 
+							<label>Password<span class="required">*</span></label>
+							<input name="password" autocomplete="off" id="pass" type="password" onblur="PassCheck();"/> 
+							<i class="fa fa-eye" aria-hidden="true" style="	position: absolute;
+							top: 45px;right: 70px;" onclick="ShowText(this)"></i>
 							<span id="passwords" class="text-danger"> </span>
 						</div>
 					</li>
 					<li class="fileds">
 						<div class="pass_fileds">
-							<label>Confirm Password</label>
-							<input name="password" id="conpass"type="password" /> 
+							<label>Confirm Password<span class="required">*</span></label>
+							<input name="password" autocomplete="off"  id="conpass"type="password" onblur="ConfirmPassCheck();"/> 
 							<span id="confrmpass" class="text-danger"> </span>
 						</div>
-							<div class="dob_fileds selectbox">
+							<div class="dob_fileds selectbox"  >
 								<label>My birthdate is</label>
 
 								<ul>
 									<li>
-										<select name="month" id="month"class="select month">
-											<option value="jan">Jan</option>
-											<option value="feb">Feb</option>
-											<option value="march">March</option>
-											<option value="april">April</option>
-											<option value="may">May</option>
-											<option value="june">June</option>
-											<option value="july">July</option>
-											<option value="aug">Aug</option>
-											<option value="sep">Sep</option>
-											<option value="oct">Oct</option>
-											<option value="nov">Nov</option>
-											<option value="dec">Dec</option>
+										<select name="month" id="month" autocomplete="off" class="select month" onchange="dispDays();">
+											<option value="0">Jan</option>
+											<option value="1">Feb</option>
+											<option value="2">March</option>
+											<option value="3">April</option>
+											<option value="4">May</option>
+											<option value="5">June</option>
+											<option value="6">July</option>
+											<option value="7">Aug</option>
+											<option value="8">Sep</option>
+											<option value="9">Oct</option>
+											<option value="10">Nov</option>
+											<option value="11">Dec</option>
 										</select>
 									</li>
 									<li>
-										<select name="day" id="day"class="select day">
+										<select name="day" id="day" autocomplete="off" class="select day">
 											<option value="1">01</option>
 											<option value="2">02</option>
 											<option value="3">03</option>
@@ -223,44 +228,45 @@
 									</li>
 
 									<li>
-										<select name="year" id="year" class="select year">
-											<option value="1998">1998</option>
-											<option value="1997">1997</option>
-											<option value="1996">1996</option>
+										<select name="year" id="year" autocomplete="off" class="select year" onchange="dispDays();">
+											
 										
 										</select>
 									</li>
+									
 								</ul>
+								<span class="text-danger " id="date_er"></span>	
 							</div>
 					</li>
 					<li class="fileds">
 						<div class="age_fileds">
 							<label>Age</label>
-							<input disabled name="age" id="age"type="text" /> 
+							<input autocomplete="off" disabled name="age" id="age"type="text"/> 
+							<span class="text-danger " id="agee"></span>
 						</div>
-						<div class="gender_fileds">
-							<label>Gender</label>
+						<div class="gender_fileds" onclick="GenderCheck();">
+							<label>Gender<span class="required">*</span></label>
 							<ul>
-								<li><input type="radio" class="radio" id="residence1" name="radio" /><label class="radio-label" for="residence1">Male</label></li>
-								<li><input type="radio" class="radio" id="residence2" name="radio" /><label class="radio-label" for="residence2">Female</label></li>
+								<li><input autocomplete="off" type="radio" class="radio" id="residence1" name="radio" /><label class="radio-label" for="residence1">Male</label></li>
+								<li><input autocomplete="off" type="radio" class="radio" id="residence2" name="radio" /><label class="radio-label" for="residence2">Female</label></li>
 							</ul>	
 						</br>
 							<span class="text-danger " id="gender"></span>
 						</div>
 					</li>
 					<li>
-						<div class="interest_fileds">
-						<label>Interest</label>
+						<div class="interest_fileds" onclick="InterestCheck();">
+						<label>Interest<span class="required">*</span></label>
 							<ul>
-								<li><input type="checkbox" class="checkbox" id="checkbox_sample18" /> <label class="css-label" for="checkbox_sample18">Biking</label></li>
-								<li><input type="checkbox" class="checkbox" id="checkbox_sample19" /> <label class="css-label" for="checkbox_sample19">Reading</label></li>
-								<li><input type="checkbox" class="checkbox" id="checkbox_sample20" /> <label class="css-label" for="checkbox_sample20">Playing</label></li>
+								<li><input type="checkbox" autocomplete="off" class="checkbox" id="checkbox_sample18" /> <label class="css-label" for="checkbox_sample18">Biking</label></li>
+								<li><input type="checkbox" autocomplete="off" class="checkbox" id="checkbox_sample19" /> <label class="css-label" for="checkbox_sample19">Reading</label></li>
+								<li><input type="checkbox" autocomplete="off" class="checkbox" id="checkbox_sample20" /> <label class="css-label" for="checkbox_sample20">Playing</label></li>
 							</ul>
 							<span class="text-danger " id="interest"></span>
 						</div>
 						<div class="about_you_fileds">
-						<label>About you</label>
-						<textarea id="aboutyou"></textarea>
+						<label>About you<span class="required">*</span></label>
+						<textarea id="aboutyou" autocomplete="off" onblur="AboutCheck();"></textarea>
 						<span class="text-danger " id="about"></span>
 						</div>						
 					</li>
